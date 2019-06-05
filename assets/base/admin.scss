@@ -12,6 +12,10 @@
   @include transform(translate3d(0, 83px, 0));
   @include transition(all 0.5s);
 
+  &.extra-option {
+    @include transform(translate3d(0, 123px, 0));
+  }
+
   &.open {
     @include transform(translate3d(0, 0, 0));
   }
@@ -191,7 +195,7 @@
         user-select: none;
 
         .project-image-holder {
-          width: calc(100% + 40px);
+          width: calc(100% + 30px);
           height: 60px;
           overflow: hidden;
 
@@ -206,11 +210,32 @@
           }
         }
 
+        .project-status {
+          width: calc(100% + 30px);
+          display: flex;
+          justify-content: flex-end;
+
+          span {
+            padding: 2px 8px;
+            font-size: 12px;
+            border-bottom-left-radius: 4px;
+
+            &.success-text {
+              background-color: $successColor;
+              color: $textColorLight;
+            }
+
+            &.warning-text {
+              background-color: $warningColor;
+            }
+          }
+        }
+
         .project-info {
           display: flex;
           flex-flow: column nowrap;
           align-items: flex-start;
-          margin-top: 10px;
+          margin-top: 5px;
           min-width: 100%;
           width: 100%;
 

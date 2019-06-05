@@ -9,6 +9,8 @@ $textColorDark: $backgroundColorDark !default;
 $textColorLight: $backgroundColorLight !default;
 $darkGrey: #333333 !default;
 $lightDarkGrey: lighten($darkGrey, 35%) !default;
+$successColor: #58b368 !default;
+$warningColor: #fab95b !default;
 $dangerColor: #ff5959 !default;
 
 $logoSize: 56px !default;

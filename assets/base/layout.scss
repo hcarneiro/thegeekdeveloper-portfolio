@@ -361,6 +361,22 @@ a {
   }
 }
 
+.dg-content {
+  font-size: 24px !important;
+}
+
+.dg-btn--ok {
+  color: $textColorLight !important;
+  background-color: $dangerColor !important;
+  border: none !important;
+}
+
+.dg-btn--cancel {
+  color: $textColorDark !important;
+  background-color: rgba($textColorDark, 0.2) !important;
+  border: none !important;
+}
+
 /* Fallback example for browsers that don't support 3D transforms (and no JS fallback) */
 .no-csstransforms3d .st-pusher,
 .no-js .st-pusher {

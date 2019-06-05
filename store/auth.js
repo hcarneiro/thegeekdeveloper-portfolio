@@ -1,19 +1,24 @@
 export const state = () => ({
   authenticated: false,
-  showAdminOverlay: false
+  showAdminOverlay: {
+    isOpen: false,
+    options: undefined
+  }
 })
 
 export const mutations = {
   setAuthenticated(state, status) {
     state.authenticated = status
   },
-  adminOverlay(state, status) {
-    if (!status) {
-      state.showAdminOverlay = !state.showAdminOverlay
+  adminOverlay(state, options) {
+    state.showAdminOverlay.options = options
+
+    if (!options) {
+      state.showAdminOverlay.isOpen = !state.showAdminOverlay.isOpen
       return
     }
 
-    state.showAdminOverlay = status
+    state.showAdminOverlay.isOpen = options.isOpen
   }
 }
 
