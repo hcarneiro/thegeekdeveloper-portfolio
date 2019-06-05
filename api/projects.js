@@ -94,12 +94,14 @@ router.post('/', auth, (req, res) => {
 
 router.put('/:id', auth, (req, res) => {
   const data = req.body
-  data.slug = slugify(data.title)
 
   database.db.models.project.findAndCountAll({
     where: {
       slug: {
         [Op.regexp]: '^(' + data.slug + ')'
+      },
+      id: {
+        [Op.not]: req.params.id
       }
     }
   })
@@ -108,6 +110,7 @@ router.put('/:id', auth, (req, res) => {
     })
     .then((count) => {
       if (count) {
+        data.slug = slugify(data.title)
         data.slug = `${data.slug}-${count}`
       }
 
