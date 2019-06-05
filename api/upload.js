@@ -8,9 +8,12 @@ const _ = require('lodash')
 const sizeOf = require('image-size')
 const fileExtension = require('file-extension')
 const config = require('../config/local-config.json')
-const private = require('../config/private.json')
-const isDev = !(process.env.NODE_ENV === 'production')
 const auth = require('../config/authentication')
+const isDev = !(process.env.NODE_ENV === 'production')
+let private
+if (isDev) {
+  private = require('../config/private.json')
+}
 
 router.use(auth)
 
@@ -22,12 +25,12 @@ router.post('/thumb', (req, res) => {
     // Grabs your file object from the request.
     let bucket = new aws.S3({
       params: {
-        Bucket: isDev ? private.S3.BUCKET_NAME : process.env.S3_BUCKET_NAME,
-        Region: isDev ? private.S3.BUCKET_REGION : process.env.S3_BUCKET_REGION
+        Bucket: isDev && private ? private.S3.BUCKET_NAME : process.env.S3_BUCKET_NAME,
+        Region: isDev && private ? private.S3.BUCKET_REGION : process.env.S3_BUCKET_REGION
       }    
     })
 
-    bucket.name = isDev ? private.S3.BUCKET_NAME : process.env.S3_BUCKET_NAME
+    bucket.name = isDev && private ? private.S3.BUCKET_NAME : process.env.S3_BUCKET_NAME
 
     const imageTest = new RegExp('image\/.*')
     const file = req.files.file

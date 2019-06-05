@@ -1,6 +1,9 @@
 const pkg = require('./package')
 const dev = !(process.env.NODE_ENV === 'production')
-const private = require('./config/private.json');
+let private
+if (dev) {
+  private = require('./config/private.json')
+}
 
 module.exports = {
   mode: 'universal',
