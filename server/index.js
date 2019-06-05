@@ -10,12 +10,15 @@ const compression = require('compression')
 const { Nuxt, Builder } = require('nuxt')
 const app = express()
 const appPackage = require('../package')
-const private = require('../config/private.json')
 const auth = require('../config/authentication')
 
 // Import and Set Nuxt.js options
 const config = require('../nuxt.config.js')
 config.dev = !(process.env.NODE_ENV === 'production')
+let private
+if (config.dev) {
+  private = require('../config/private.json')
+}
 
 require('../api/models/index')
 
