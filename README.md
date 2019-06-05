@@ -1,6 +1,4 @@
-# thegeekdeveloper-frontend
-
-> The Geek Developer Portfolio
+# The Geek Developer Portfolio
 
 ## Build Setup
 
