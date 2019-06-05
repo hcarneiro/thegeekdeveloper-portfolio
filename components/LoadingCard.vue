@@ -16,7 +16,8 @@
 export default {
   props: {
     context: {
-      type: String
+      type: String,
+      default: ''
     }
   }
 }
