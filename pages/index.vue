@@ -15,8 +15,10 @@
       </div>
     </div>
 
-    <div v-if="loading" class="container loading-holder">
-      <loading />
+    <div v-if="loading" class="loading-holder home-page">
+      <loading-card context="home" />
+      <loading-card context="home" />
+      <loading-card context="home" />
     </div>
 
     <div class="portfolio-preview">
@@ -64,7 +66,7 @@
 </template>
 
 <script>
-import Loading from '~/components/Loading'
+import LoadingCard from '~/components/LoadingCard'
 import _ from 'lodash'
 import { mapState } from 'vuex'
 
@@ -76,7 +78,7 @@ export default {
     }
   },
   components: {
-    Loading
+    LoadingCard
   },
   data() {
     return {

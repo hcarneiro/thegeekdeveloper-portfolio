@@ -1,5 +1,7 @@
 <template>
-  <div class="loader">
-    Loading...
+  <div class="loader-holder">
+    <div class="loader">
+      Loading
+    </div>
   </div>
 </template>

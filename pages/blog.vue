@@ -7,11 +7,17 @@
         </h1>
       </div>
     </div>
+
+    <div v-if="loading" class="row loading-holder blog-page">
+      <loading-card context="blog" />
+      <loading-card context="blog" />
+      <loading-card context="blog" />
+    </div>
+
     <div class="row">
-      <loading v-if="loading" />
-      <div v-for="(post, index) in posts" :key="index" :class="'col-md-4 ' + getRandomInt()" @click="openMediumPost(post.uniqueSlug)">
+      <div v-for="(post, index) in posts" :key="index" class="col-md-4" @click="openMediumPost(post.uniqueSlug)">
         <div class="card">
-          <div class="card-banner" :style="'background-image: url(https://cdn-images-1.medium.com/max/1200/' + post.virtuals.previewImage.imageId + ')'" />
+          <div :class="'card-banner gradient-' + getRandomInt()" :style="'background-image: url(https://cdn-images-1.medium.com/max/1200/' + post.virtuals.previewImage.imageId + ')'" />
           <div>
             <h3 class="card-title">
               {{ post.title }}
@@ -34,7 +40,7 @@
 </template>
 
 <script>
-import Loading from '~/components/Loading'
+import LoadingCard from '~/components/LoadingCard'
 import { mapState } from 'vuex'
 
 export default {
@@ -44,7 +50,7 @@ export default {
     }
   },
   components: {
-    Loading
+    LoadingCard
   },
   data() {
     return {
