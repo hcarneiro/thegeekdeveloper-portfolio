@@ -27,4 +27,14 @@
       color: $textColorLight;
     }
   }
+
+  .page-content {
+    text-align: justify;
+  }
+
+  .page-tags {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid rgba($backgroundColorDark, 0.1);
+  }
 }
