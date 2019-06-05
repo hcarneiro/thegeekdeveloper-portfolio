@@ -64,7 +64,7 @@
 
 <script>
 import Loading from '~/components/Loading'
-import { map, uniq } from 'lodash'
+import _ from 'lodash'
 import { mapState } from 'vuex'
 
 export default {
@@ -86,10 +86,13 @@ export default {
   computed: {
     ...mapState({
       projects: (state) => {
-        return state.projects.list
+        return _.chain(state.projects.list)
+          .filter({ published: true })
+          .take(6)
+          .value()
       },
       categories: (state) => {
-        const categories = uniq(map(state.projects.list, 'category'))
+        const categories = _.uniq(_.map(state.projects.list, 'category'))
         return categories
       }
     })

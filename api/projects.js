@@ -51,7 +51,8 @@ router.get('/:id', async (req, res) => {
 router.get('/slug/:slug', async (req, res) => {
   database.db.models.project.findOne({
     where: {
-      slug: req.params.slug
+      slug: req.params.slug,
+      published: true
     }
   })
     .then((result) => {
