@@ -22,4 +22,4 @@ deployment:
   production:
     branch: production
     heroku:
-      appname: thegeekdeveloper-frontend
+      appname: thegeekdeveloper-portfolio
