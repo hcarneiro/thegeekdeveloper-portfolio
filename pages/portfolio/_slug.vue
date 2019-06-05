@@ -5,8 +5,11 @@
       <div class="container">
         <div class="big-wrapper">
           <div class="title-wrapper">
-            <h1>
+            <h1 v-if="project">
               {{ project.title }}
+            </h1>
+            <h1 v-else>
+              No project found
             </h1>
             <div class="title-subtitle">
               <p>
@@ -17,15 +20,23 @@
         </div>
       </div>
     </div>
-
-    <div class="container">
-      <div class="page-content" v-html="project.content" />
-    </div>
-    <div class="container">
-      <div class="page-tags">
-        {{ project.tags }}
+    <template v-if="project">
+      <div class="container">
+        <div class="page-content" v-html="project.content" />
       </div>
-    </div>
+      <div class="container">
+        <div class="page-tags">
+          {{ project.tags }}
+        </div>
+      </div>
+    </template>
+    <template v-else>
+      <div class="text-center">
+        <nuxt-link class="primary-button uppercase inline" tag="div" :to="'/portfolio'">
+          Go back
+        </nuxt-link>
+      </div>
+    </template>
   </section>
 </template>
 <script>
