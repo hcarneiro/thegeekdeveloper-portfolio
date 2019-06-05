@@ -29,6 +29,19 @@ module.exports = {
   },
 
   /*
+  ** Plugins to load before mounting the App
+  */
+  plugins: [
+    { src: '~/plugins/modernizr-custom.js', ssr: false },
+    { src: '~/plugins/nuxt-swiper-plugin.js', ssr: false },
+    { src: '~/plugins/vue-dialog.js', ssr: false },
+    { src: '~/plugins/vue-lazyload.js', ssr: false },
+    { src: '~/plugins/vue-froala.js', ssr: false },
+    '~/plugins/fontawesome.js',
+    '~/plugins/directives.js'
+  ],
+
+  /*
   ** Global CSS
   */
   css: [
@@ -38,17 +51,6 @@ module.exports = {
     '@/assets/main.css'
   ],
 
-  /*
-  ** Plugins to load before mounting the App
-  */
-  plugins: [
-    { src: '~/plugins/modernizr-custom.js', ssr: false },
-    { src: '~/plugins/nuxt-swiper-plugin.js', ssr: false },
-    { src: '~/plugins/vue-lazyload.js', ssr: false },
-    { src: '~/plugins/vue-froala.js', ssr: false },
-    '~/plugins/fontawesome.js',
-    '~/plugins/directives.js'
-  ],
   /*
   ** Nuxt.js modules
   */

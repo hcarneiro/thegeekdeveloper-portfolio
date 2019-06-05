@@ -75,6 +75,10 @@
             <froala id="eg-dark-theme" v-model="projectContent" :tag="'textarea'" :config="editorSettings" />
           </no-ssr>
         </div>
+        <div class="form-group form-check">
+          <input id="publish-project" v-model="projectPublished" type="checkbox" class="form-check-input">
+          <label class="form-check-label" for="publish-project">Publish project?</label>
+        </div>
         <div class="admin-button-holder">
           <div class="btn btn-link cancel-btn" @click.prevent="goBack">
             Cancel
@@ -93,6 +97,10 @@
           <div class="card">
             <div class="project-image-holder">
               <img v-if="project.thumb" v-lazy="project.thumb" class="project-image">
+            </div>
+            <div class="project-status">
+              <span v-if="project.published" class="success-text">Published</span>
+              <span v-else class="warning-text">Draft</span>
             </div>
             <div class="project-info">
               <div class="project-title">
@@ -161,6 +169,7 @@ export default {
       projectImage: '',
       projectThumb: '',
       projectContent: '',
+      projectPublished: false,
       file: '',
       editorSettings: {
         theme: 'dark',
@@ -190,6 +199,13 @@ export default {
         fontFamilySelection: true,
         fontSizeSelection: true,
         paragraphFormatSelection: true
+      },
+      dialog: {
+        message: 'Are you sure you want to delete the project?',
+        options: {
+          okText: 'Delete',
+          cancelText: 'Cancel'
+        }
       }
     }
   },
@@ -197,8 +213,18 @@ export default {
     ...mapState({
       projects: (state) => {
         return state.projects.list
+      },
+      adminOverlay: (state) => {
+        return state.auth.showAdminOverlay
       }
     })
+  },
+  watch: {
+    show(newVal) {
+      if (this.adminOverlay.options && this.adminOverlay.options.projectId) {
+        this.editProject(this.adminOverlay.options.projectId)
+      }
+    }
   },
   created() {
     this.getProjects()
@@ -228,6 +254,7 @@ export default {
       this.projectContent = ''
       this.projectImage = ''
       this.projectThumb = ''
+      this.projectPublished = false
       this.file = ''
       this.$refs.addProjectForm.reset()
     },
@@ -242,7 +269,7 @@ export default {
         content: this.projectContent,
         image: this.projectImage,
         thumb: this.projectThumb,
-        published: true
+        published: this.projectPublished
       }
 
       this.goBack()
@@ -303,19 +330,26 @@ export default {
       this.projectContent = project.content
       this.projectImage = project.image
       this.projectThumb = project.thumb
+      this.projectPublished = project.published
 
       this.addProject(true)
     },
     deleteProject(projectId) {
-      this.loading = true
+      this.$dialog.confirm(this.dialog.message, this.dialog.options)
+        .then((dialog) => {
+          this.loading = true
 
-      this.$store.dispatch('projects/removeProject', projectId)
-        .then(() => {
-          return this.getProjects()
+          this.$store.dispatch('projects/removeProject', projectId)
+            .then(() => {
+              return this.getProjects()
+            })
         })
+        .catch(() => {})
     },
     closeOverlay() {
-      this.$store.commit('auth/adminOverlay', false)
+      this.$store.commit('auth/adminOverlay', {
+        isOpen: false
+      })
     }
   }
 }

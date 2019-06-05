@@ -35,7 +35,7 @@
     </nav>
 
     <admin-area v-if="authenticated" :is-authenticated="authenticated" />
-    <admin-overlay v-if="authenticated" :show="showAdminOverlay" />
+    <admin-overlay v-if="authenticated" :show="showAdminOverlay && showAdminOverlay.isOpen" />
 
     <div class="st-pusher">
       <div class="st-content">
