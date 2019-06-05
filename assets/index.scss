@@ -1,0 +1,15 @@
+@import 'node_modules/bootstrap/scss/bootstrap';
+@import 'node_modules/bootstrap-vue/src/index.scss';
+
+@import "~assets/base/mixins";
+@import "~assets/base/variables";
+@import "~assets/base/layout";
+@import "~assets/base/admin";
+@import "~assets/base/footer";
+
+@import "~assets/pages/general";
+@import "~assets/pages/home";
+@import "~assets/pages/about";
+@import "~assets/pages/contact";
+@import "~assets/pages/work";
+@import "~assets/pages/blog";

@@ -1,0 +1,39 @@
+.st-pusher {
+  .footer {
+    min-height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: $paddingSize;
+    border-top: 1px solid rgba($backgroundColorDark, 0.1);
+
+    ul {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+
+      li {
+        display: inline-block;
+        margin-left: 2.66667rem;
+
+        @include below($mobileSize) {
+          margin-left: 1rem;
+          font-size: 0.8em;
+        }
+
+        &:first-child {
+          margin-left: 0;
+        }
+
+        a {
+          color: $textColorDark;
+          text-decoration: none;
+
+          &:hover {
+            color: $secondaryColor;
+          } 
+        }
+      }
+    }
+  }
+}

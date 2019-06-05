@@ -1,0 +1,21 @@
+$backgroundColorDark: #022c43 !default;
+$backgroundColorLight: #fafafa !default;
+$highlightColor: #facf5a !default;
+$highlightColorFaded: #d49b00 !default;
+$highlightColorLight: #f9c129 !default;
+$secondaryColor: #83d6d6 !default;
+$secondaryColorLight: #74e7e7 !default;
+$textColorDark: $backgroundColorDark !default;
+$textColorLight: $backgroundColorLight !default;
+$darkGrey: #333333 !default;
+$lightDarkGrey: lighten($darkGrey, 35%) !default;
+$dangerColor: #ff5959 !default;
+
+$logoSize: 56px !default;
+$logoSizeSmall: 40px !default;
+$paddingSize: 20px !default;
+
+$mobileSize: 576px !default;
+$tabletSize: 768px !default;
+$desktopSize: 992px !default;
+$largeSize: 1200px !default;

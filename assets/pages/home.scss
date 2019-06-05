@@ -1,0 +1,18 @@
+.home-page{
+  .big-wrapper {
+    align-items: center;
+
+    .title-subtitle {
+      &:after {
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        display: block;
+        content: '';
+        width: 35%;
+        height: 4px;
+        background-color: $highlightColor;
+      }
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "AUTH_USER": "admin",
+  "AUTH_PASS": "secretpassword",
+  "DATABASE_URL": "postgres://hcarneiro@localhost:5433/geekdeveloper-local",
+  "query_logging": true,
+  "redis": {
+    "host": "127.0.0.1"
+  },
+  "cdn_host": "http://cdn.thegeekdeveloper.com"
+}

@@ -1,0 +1,28 @@
+.contact-page {
+  .big-wrapper {
+    align-items: flex-start;
+
+    &.contact-email {
+      align-items: center;
+
+      .title-wrapper {
+        text-align: center;
+
+        h1 {
+          @include below($mobileSize) {
+            font-size: 1.5rem;
+          }
+        }
+
+        a {
+          text-decoration: none;
+          color: $secondaryColor;
+        }
+      }
+    }
+  }
+
+  .col-md-4 {
+    margin-bottom: $paddingSize * 3;
+  }
+}

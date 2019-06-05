@@ -1,0 +1,368 @@
+html,
+body,
+#__nuxt,
+#__layout,
+.st-container,
+.st-pusher,
+.st-content {
+  height: 100%;
+}
+
+html,
+body {
+  background-color: $backgroundColorLight;
+}
+
+html {
+  &.ios {
+    .main-content {
+      overflow-y: scroll; /* has to be scroll, not auto */
+      -webkit-overflow-scrolling: touch;
+    }
+  }
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  color: $backgroundColorDark;
+}
+
+h1,
+h2,
+h3 {
+  font-family: 'Roboto Slab', serif;
+  font-weight: 400;
+}
+
+a {
+  color: $secondaryColor;
+  text-decoration: none;
+
+  &:hover,
+  &:focus,
+  &:active,
+  &:active:hover,
+  &:active:focus {
+    text-decoration: none;
+    color: darken($secondaryColor, 20%);
+  }
+}
+
+.container {
+  padding: 0 $paddingSize;
+}
+
+.st-content {
+  overflow-y: auto;
+  background-color: $backgroundColorLight;
+  color: $textColorDark;
+}
+
+.st-content,
+.st-content-inner {
+  position: relative;
+}
+
+.st-content-inner {
+  height: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+
+  .main-content {
+    overflow-y: auto;
+    flex: 1;
+    display: flex;
+    flex-flow: column nowrap;
+
+    .main-container {
+      flex: 1;
+    }
+  }
+}
+
+.st-container {
+  background: $backgroundColorDark;
+  position: relative;
+  overflow: hidden;
+
+  .st-pusher {
+    position: relative;
+    left: 0;
+    z-index: 99;
+    height: 100%;
+    @include transition(transform 0.5s);
+
+    &:after {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 0;
+      height: 0;
+      z-index: 1;
+      background: rgba($backgroundColorDark, 0.2);
+      content: '';
+      opacity: 0;
+      @include transition(opacity 0.5s, width 0.1s 0.5s, height 0.1s 0.5s);
+    }
+  }
+
+  &.st-menu-open {
+    .st-menu:after {
+      width: 0;
+      height: 0;
+      opacity: 0;
+      @include transition(opacity 0.5s, width 0.1s 0.5s, height 0.1s 0.5s);
+    }
+
+    .st-pusher:after {
+      width: 100%;
+      height: 100%;
+      opacity: 1;
+      @include transition(opacity 0.5s);
+    }
+  }
+
+  .st-menu {
+    display: flex;
+    flex-flow: column nowrap;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 100;
+    visibility: hidden;
+    width: 300px;
+    height: 100%;
+    background: $highlightColor;
+    @include transition(all 0.5s);
+
+    &:after {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba($backgroundColorDark, 0.2);
+      content: '';
+      opacity: 1;
+      @include transition(opacity 0.5s);
+    }
+  }
+
+  .header {
+    display: flex;
+    align-items: center;
+    z-index: 1;
+    padding: $paddingSize;
+    background-color: $backgroundColorLight;
+    @include transition(all 0.3s cubic-bezier(0.25, 0.8, 0.5, 1));
+
+    .burger-menu {
+      background-color: $backgroundColorLight;
+      color: $textColorDark;
+      border-radius: $logoSize;
+      height: $logoSize;
+      width: $logoSize;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.2em;
+      box-shadow: 0px 0px 6px -1px rgba($backgroundColorDark,0.2);
+      @include transition(all 0.3s cubic-bezier(0.25, 0.8, 0.5, 1));
+
+      &:active,
+      &:hover,
+      &:focus,
+      &:active:hover,
+      &:active:focus {
+        background-color: $highlightColor;
+        color: $textColorDark;
+        box-shadow: 0px 6px 10px 0px rgba($backgroundColorDark, 0.1);
+      }
+    }
+
+    &.minimal {
+      box-shadow: 0px 6px 8px 0px rgba($backgroundColorDark, 0.1);
+      padding: #{$paddingSize / 2} $paddingSize;
+
+      .logo {
+        width: $logoSizeSmall;
+        min-width: $logoSizeSmall;
+        height: $logoSizeSmall;
+        border-radius: $logoSizeSmall;
+      }
+
+      .burger-menu {
+        height: $logoSizeSmall;
+        width: $logoSizeSmall;
+        border-radius: $logoSizeSmall;
+        font-size: 1em;
+      }
+    }
+  }
+
+  .st-menu {
+    .logo-wrapper {
+      width: 56px;
+      height: 56px;
+      max-height: 56px;
+      position: relative;
+      top: 0;
+      left: 0;
+      margin: 1em 1em 1em auto;
+      border-radius: 56px;
+    }
+
+    .footer {
+      min-height: 45px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 12px;
+      color: $highlightColorFaded;
+    }
+  }
+}
+
+.logo-wrapper {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  color: $backgroundColorDark;
+  margin-right: $paddingSize;
+
+  &.no-flex {
+    display: flex;
+    justify-content: flex-end;
+    margin: 0 $paddingSize 0 0;
+    padding: 1em 0;
+
+    .logo {
+      margin: 0;
+    }
+  }
+
+  .logo {
+    width: $logoSize;
+    min-width: $logoSize;
+    height: $logoSize;
+    border-radius: $logoSize;
+    margin-right: 15px;
+    background-image: url('/icon.png');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    @include transition(all 0.3s cubic-bezier(0.25, 0.8, 0.5, 1));
+  }
+
+  .logo-text {
+    font-size: 1em;
+    font-weight: 700;
+    line-height: 1.2;
+
+    @include above($mobileSize) {
+      font-size: 1.2em;
+    }
+    @include above($tabletSize) {
+      font-size: 1.5em;
+    }
+  }
+}
+
+/* Scale and rotate pusher */
+.st-effect {
+  &.st-container {
+    -webkit-perspective: 1500px;
+    -moz-perspective: 1500px;
+    -ms-perspective: 1500px;
+    -o-perspective: 1500px;
+    perspective: 1500px;
+  }
+
+  .st-pusher {
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    -o-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+  }
+
+  &.st-menu-open {
+    .st-pusher {
+      overflow: hidden;
+      @include transform(translate3d(-100px, 0, -600px) rotateY(20deg));
+    }
+  }
+
+  &.st-menu {
+    opacity: 1;
+    @include transform(translate3d(100%, 0, 0));
+
+    &:after {
+      display: none;
+    }
+  }
+
+  &.st-menu-open {
+    .st-effect {
+      &.st-menu {
+        visibility: visible;
+        @include transition(transform 0.5s);
+        @include transform(translate3d(0, 0, 0));
+      }
+    }
+  }
+}
+
+/* Menu style */
+.st-menu {
+  ul {
+    flex: 1;
+    overflow: auto;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-align: right;
+
+    li {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+
+      a {
+        width: 100%;
+        padding: 1em $paddingSize;
+        text-decoration: none;
+        color: $highlightColorFaded;
+        text-transform: uppercase;
+        text-shadow: 0 0 1px rgba($backgroundColorLight, 0.1);
+        outline: none;
+        font-weight: 400;
+        @include transition(background 0.3s);
+
+        &:hover,
+        &:active,
+        &:focus,
+        &:active:hover,
+        &:active:focus {
+          background: darken($highlightColor, 5%);
+          color: rgba($backgroundColorDark, 0.7);
+        }
+
+        &.nuxt-link-exact-active {
+          background: darken($highlightColor, 10%);
+          color: $backgroundColorDark;
+        }
+      }
+    }
+  }
+}
+
+/* Fallback example for browsers that don't support 3D transforms (and no JS fallback) */
+.no-csstransforms3d .st-pusher,
+.no-js .st-pusher {
+  padding-left: 300px;
+}

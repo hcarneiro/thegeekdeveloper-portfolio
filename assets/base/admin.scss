@@ -1,0 +1,265 @@
+.admin-toolbar {
+  position: fixed;
+  left: 20px;
+  bottom: 0;
+  background-color: $backgroundColorDark;
+  color: #ffffff;
+  z-index: 100;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  overflow: hidden;
+
+  @include transform(translate3d(0, 83px, 0));
+  @include transition(all 0.5s);
+
+  &.open {
+    @include transform(translate3d(0, 0, 0));
+  }
+
+  ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+
+    li {
+      padding: 8px 12px;
+      cursor: pointer;
+      border-bottom: 1px solid rgba($textColorLight, 0.2);
+      background-color: lighten($backgroundColorDark, 5%);
+      color: rgba($textColorLight, 0.8);
+
+      &.heading {
+        position: relative;
+        padding-right: 30px;
+        background-color: $backgroundColorDark;
+        color: $textColorLight;
+
+        span {
+          position: absolute;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          width: 30px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+      }
+
+      &:hover {
+        color: $textColorLight;
+      }
+    }
+  }
+
+}
+
+.admin-overlay {
+  display: flex;
+  flex-flow: column nowrap;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 100;
+  opacity: 0;
+  visibility: hidden;
+  width: 50%;
+  height: 100%;
+  padding: 40px 0 0;
+  background: $backgroundColorLight;
+  box-shadow: -6px 0px 8px 0px rgba(2, 44, 67, 0.1);
+  @include transform(translate3d(100%, 0, 0));
+  @include transition(all 0.5s);
+
+  &.active {
+    opacity: 1;
+    visibility: visible;
+    @include transform(translate3d(0, 0, 0));
+  }
+
+  .admin-header {
+    display: flex;
+    align-items: center;
+    padding: 0 40px;
+
+    .heading-holder {
+      display: flex;
+      align-items: center;
+      flex: 1;
+
+      span {
+        width: 38px;
+        height: 38px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        font-size: 26px;
+        cursor: pointer;
+      }
+
+      h2 {
+        margin: 0 0 0 10px;
+      }
+    }
+
+    
+
+    .admin-add-project-holder {
+      display: flex;
+      justify-content: center;
+      margin-left: 30px;
+    }
+  }
+
+  .admin-projects-holder {
+    position: relative;
+    flex: 1;
+    padding: 40px;
+    overflow: auto;
+
+    .preview-image-btn-wrapper {
+      .primary-button {
+        position: relative;
+
+        input[type=file] {
+          position: absolute;
+          left: 0;
+          top: 0;
+          bottom: 0;
+          opacity: 0;
+          cursor: pointer;
+        }
+      }
+
+      .preview-image-preview {
+        display: inline-block;
+        width: 44px;
+        height: 44px;
+      }
+    }
+
+    .admin-button-holder {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: center;
+      align-items: center;
+      margin-top: 50px;
+
+      div + div {
+        margin-left: 20px;
+      }
+    }
+
+    .admin-empty-list {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100%;
+      @include transform(translate(-50%,-50%))
+    }
+
+    .jumbotron {
+      padding: 2rem 2rem;
+      text-align: center;
+      background-color: #f2f2f2;
+      color: $lightDarkGrey;
+      border-radius: 20px;
+
+      span {
+        font-size: 5em;
+        color: $secondaryColor;
+      }
+
+      h3 {
+        margin-bottom: 20px;
+      }
+    }
+
+    .admin-projects-list {
+      .col-md-4 {
+        margin-bottom: 30px;
+      }
+
+      .card {
+        position: relative;
+        text-align: left;
+        padding: 0 15px 38px;
+        border: 1px solid rgba($lightDarkGrey, 0.2);
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+
+        .project-image-holder {
+          width: calc(100% + 40px);
+          height: 60px;
+          overflow: hidden;
+
+          .project-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            background-color: lighten($darkGrey, 75%);
+            background-size: cover;
+            background-position: center center;
+            height: 60px;
+          }
+        }
+
+        .project-info {
+          display: flex;
+          flex-flow: column nowrap;
+          align-items: flex-start;
+          margin-top: 10px;
+          min-width: 100%;
+          width: 100%;
+
+          .project-title {
+            font-size: 18px;
+          }
+
+          .project-category {
+            font-size: 14px;
+            color: $lightDarkGrey;
+          }
+        }
+
+        .project-controls {
+          position: absolute;
+          bottom: 8px;
+          left: 8px;
+          right: 8px;
+          display: flex;
+          justify-content: flex-end;
+          opacity: 0;
+          visibility: hidden;
+          @include transition(all 0.3s cubic-bezier(0.25, 0.8, 0.5, 1));
+
+          span {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 25px;
+            height: 25px;
+            color: $secondaryColor;
+
+            + span {
+              margin-left: 10px;
+              color: $dangerColor;
+            }
+          }
+        }
+
+        &:hover {
+          border: 1px solid transparent;
+
+          .project-controls {
+            opacity: 1;
+            visibility: visible;
+          }
+        }
+      }
+    }
+  }
+}

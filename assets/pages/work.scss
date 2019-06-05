@@ -1,0 +1,30 @@
+.work-page {
+  .project-header {
+    position: relative;
+    background-color: $secondaryColor;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    margin-bottom: 8em;
+
+    .project-header-screen {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 1;
+      background-color: rgba(#233142, 0.5);
+    }
+
+    .container {
+      position: relative;
+      z-index: 2;
+    }
+
+    .title-wrapper,
+    .title-subtitle {
+      color: $textColorLight;
+    }
+  }
+}

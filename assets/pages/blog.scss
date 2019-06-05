@@ -1,0 +1,46 @@
+.blog-page {
+  .col-md-4 {
+    margin-bottom: $paddingSize * 3;
+  }
+
+  .card {
+    text-align: left;
+    cursor: pointer;
+
+    .card-banner {
+      background-position: center center;
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+
+    .card-title {
+      font-size: 1.2em;
+    }
+
+    .card-description {
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -moz-box-orient: vertical;
+      -webkit-box-orient: vertical;
+      box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .card-tags {
+      margin-top: 20px;
+
+      span {
+        display: inline-block;
+        font-size: 0.8em;
+        background-color: lighten($darkGrey, 75%);
+        padding: 0.2em 0.5em;
+        border-radius: 4px;
+        margin: 3px 5px 0 0;
+
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+  }
+}
