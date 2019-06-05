@@ -9,7 +9,10 @@
     </div>
 
     <div class="portfolio-preview">
-      <loading v-if="loading" />
+      <div v-if="loading" class="loading-holder row">
+        <loading-card />
+        <loading-card />
+      </div>
       <div v-if="!loading && projects && projects.length" class="portfolio-controls">
         <a class="filters-button">
           <span>Filters</span>
@@ -63,7 +66,7 @@
 </template>
 
 <script>
-import Loading from '~/components/Loading'
+import LoadingCard from '~/components/LoadingCard'
 import _ from 'lodash'
 import { mapState } from 'vuex'
 
@@ -74,7 +77,7 @@ export default {
     }
   },
   components: {
-    Loading
+    LoadingCard
   },
   data() {
     return {
