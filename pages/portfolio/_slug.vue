@@ -24,10 +24,8 @@
       <div class="container">
         <div class="page-content" v-html="project.content" />
       </div>
-      <div class="container">
-        <div class="page-tags">
-          {{ project.tags }}
-        </div>
+      <div class="container page-tags">
+        <strong>Technologies:</strong> {{ project.tags }}
       </div>
     </template>
     <template v-else>
