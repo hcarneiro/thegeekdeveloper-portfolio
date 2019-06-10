@@ -24,8 +24,34 @@
       <div class="container">
         <div class="page-content" v-html="project.content" />
       </div>
-      <div class="container page-tags">
-        <strong>Technologies:</strong> {{ project.tags }}
+      <div class="container pre-footer">
+        <div class="row">
+          <div class="col-md-6">
+            <strong>Technologies:</strong> {{ project.tags }}
+          </div>
+          <div class="col-md-6 text-right">
+            <no-ssr>
+              <vue-goodshare-linked-in
+                :page_url="'https://www.thegeekdeveloper.com' + fullPath"
+                title_social="LinkedIn"
+                has_counter
+                has_icon
+              />
+              <vue-goodshare-facebook
+                :page_url="'https://www.thegeekdeveloper.com' + fullPath"
+                title_social="Facebook"
+                has_counter
+                has_icon
+              />
+              <vue-goodshare-twitter
+                :page_url="'https://www.thegeekdeveloper.com' + fullPath"
+                title_social="Twitter"
+                has_counter
+                has_icon
+              />
+            </no-ssr>
+          </div>
+        </div>
       </div>
     </template>
     <template v-else>
@@ -56,7 +82,10 @@ export default {
       project: (state) => {
         return state.projects.project
       }
-    })
+    }),
+    fullPath() {
+      return this.$route.path
+    }
   },
   created() {
     this.slug = this.$route.params.slug
