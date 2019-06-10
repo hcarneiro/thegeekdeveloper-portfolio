@@ -35,7 +35,7 @@
           :key="index"
           tag="div"
           :to="'/portfolio/' + project.slug"
-          :class="'mix col-md-6 ' + project.category.toLowerCase()"
+          :class="'mix col-md-6 ' + getCategoryClasses(project.category)"
           :data-slug="project.slug"
         >
           <div v-if="project.thumb" :style="'background-image: url(' + project.thumb + ')'" class="folio-image" />
@@ -95,8 +95,21 @@ export default {
           .value()
       },
       categories: (state) => {
-        const categories = _.uniq(_.map(state.projects.list, 'category'))
-        return categories
+        const splitCategories = []
+
+        state.projects.list.forEach((project) => {
+          const categories = project.category.split(',')
+          if (Array.isArray(categories) && categories.length) {
+            for (let i = 0; i < categories.length; i++) {
+              splitCategories.push(categories[i].trim())
+            }
+          } else {
+            splitCategories.push(project.category.trim())
+          }
+        })
+
+        const uniqCategories = _.uniq(splitCategories)
+        return uniqCategories
       }
     })
   },
@@ -114,6 +127,19 @@ export default {
       })
   },
   methods: {
+    getCategoryClasses(category) {
+      const splitCategories = []
+      const categories = category.split(',')
+      if (Array.isArray(categories) && categories.length) {
+        for (let i = 0; i < categories.length; i++) {
+          splitCategories.push(categories[i].trim().toLowerCase())
+        }
+      } else {
+        splitCategories.push(category.trim().toLowerCase())
+      }
+
+      return splitCategories.join(' ')
+    },
     getProjects() {
       return this.$store.dispatch('projects/getProjects')
     },
