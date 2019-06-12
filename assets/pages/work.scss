@@ -32,9 +32,19 @@
     text-align: justify;
   }
 
-  .page-tags {
+  .pre-footer {
     margin-top: 40px;
     padding-top: 20px;
     border-top: 1px solid rgba($backgroundColorDark, 0.1);
+
+    .row {
+      div + div {
+        color: $textColorLight;
+
+        @include below($tabletSize) {
+          text-align: left !important;
+          margin-top: 20px;        }
+      }
+    }
   }
 }

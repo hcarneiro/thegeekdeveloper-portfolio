@@ -51,6 +51,7 @@ img {
   &:focus,
   &:active:hover,
   &:active:focus {
+    color: $textColorLight;
     background-color: $highlightColorLight;
     box-shadow: 0px 6px 14px 0px rgba($backgroundColorDark,0.1);
     outline: none;
@@ -105,6 +106,7 @@ img {
   &:focus,
   &:active:hover,
   &:active:focus {
+    color: $textColorLight;
     background-color: $secondaryColorLight;
     box-shadow: 0px 6px 14px 0px rgba($backgroundColorDark,0.1);
     outline: none;
@@ -369,6 +371,7 @@ img {
         bottom: 0;
         left: $paddingSize;
         z-index: 1;
+        border: 1px solid rgba(0, 0, 0, 0.05);
         background-color: lighten($darkGrey, 75%);
         background-position: center center;
         background-size: cover;
@@ -517,6 +520,7 @@ img {
 .swiper-slide {
   position: relative;
   width: 90%;
+  border: 1px solid rgba(0, 0, 0, 0.05);
 
   @include above($mobileSize) {
     width: 70%;
