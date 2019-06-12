@@ -71,9 +71,7 @@
         </div>
         <div class="form-group">
           <label>Page content</label>
-          <no-ssr>
-            <froala id="eg-dark-theme" v-model="projectContent" :tag="'textarea'" :config="editorSettings" />
-          </no-ssr>
+          <textarea id="content-editor" v-model="projectContent" placeholder="Start typing..." />
         </div>
         <div class="form-group form-check">
           <input id="publish-project" v-model="projectPublished" type="checkbox" class="form-check-input">
@@ -142,6 +140,7 @@
 </template>
 
 <script>
+/* global textboxio */
 import Loading from '~/components/Loading'
 import { find } from 'lodash'
 import { mapState } from 'vuex'
@@ -171,34 +170,24 @@ export default {
       projectContent: '',
       projectPublished: false,
       file: '',
-      editorSettings: {
-        theme: 'dark',
-        heightMax: 400,
-        imageUploadURL: '/api/upload/thumb',
-        imageDefaultWidth: 0,
-        immediateVueModelUpdate: true,
-        toolbarButtons: {
-          'moreText': {
-            'buttons': ['bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', 'fontSize', 'textColor', 'backgroundColor', 'inlineClass', 'clearFormatting'],
-            'buttonsVisible': 2
-          },
-          'moreParagraph': {
-            'buttons': ['alignLeft', 'alignCenter', 'alignRight', 'alignJustify', 'formatOL', 'formatUL', 'paragraphStyle', 'lineHeight', 'outdent', 'indent', 'quote'],
-            'buttonsVisible': 0
-          },
-          'moreRich': {
-            'buttons': ['insertLink', 'insertImage', 'specialCharacters', 'embedly', 'insertHR'],
-            'buttonsVisible': 2
-          },
-          'moreMisc': {
-            'buttons': ['undo', 'redo', 'fullscreen', 'spellChecker', 'selectAll', 'html'],
-            'buttonsVisible': 0
-          }
+      editor: undefined,
+      editorOptions: {
+        ui: {
+          autoresize: false
         },
-        pastePlain: true,
-        fontFamilySelection: true,
-        fontSizeSelection: true,
-        paragraphFormatSelection: true
+        css: {
+          stylesheets: [
+            '/textboxio/resources/css/bootstrap.min.css'
+          ]
+        },
+        images: {
+          editing: {
+            enabled: false
+          },
+          upload: {
+            url: '/api/upload/thumb'
+          }
+        }
       },
       dialog: {
         message: 'Are you sure you want to delete the project?',
@@ -224,10 +213,22 @@ export default {
       if (this.adminOverlay.options && this.adminOverlay.options.projectId) {
         this.editProject(this.adminOverlay.options.projectId)
       }
+    },
+    addingProject(value) {
+      if (value) {
+        this.$nextTick(() => {
+          this.editor = textboxio.replace('#content-editor', this.editorOptions)
+        })
+      }
     }
   },
   created() {
     this.getProjects()
+  },
+  mounted() {
+    if (this.addingProject) {
+      this.editor = textboxio.replace('#content-editor', this.editorOptions)
+    }
   },
   methods: {
     getProjects() {
