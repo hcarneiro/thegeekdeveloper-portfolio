@@ -1,25 +1,10 @@
 import _ from 'lodash'
 
-console.log(process.env)
-
-const dev = !(process.env.NODE_ENV === 'production')
-let privateConfig
-if (dev) {
-  try {
-    privateConfig = require('../config/private.json')
-  } catch (err) {
-    privateConfig = undefined
-  }
-}
-
 const oneSignalHeaders = {
-  'Content-Type': 'application/json; charset=utf-8',
-  'Authorization': `Basic ${dev && privateConfig ? privateConfig.ONESIGNAL_REST_API : process.env.ONESIGNAL_REST_API}`
+  'Content-Type': 'application/json; charset=utf-8'
 }
 
 const oneSignalMessage = {
-  app_id: dev && privateConfig ? privateConfig.ONESIGNAL_APP_ID : process.env.ONESIGNAL_APP_ID,
-  template_id: dev && privateConfig ? privateConfig.ONESIGNAL_TEMPLATE_ID : process.env.ONESIGNAL_TEMPLATE_ID,
   included_segments: ['All']
 }
 
@@ -27,9 +12,7 @@ const oneSignalOptions = {
   baseURL: 'https://onesignal.com',
   port: 443,
   url: '/api/v1/notifications',
-  method: 'POST',
-  headers: oneSignalHeaders,
-  data: oneSignalMessage
+  method: 'POST'
 }
 
 export const state = () => ({
@@ -47,16 +30,22 @@ export const mutations = {
   addProject(state, project) {
     state.list.push(project)
   },
-  updateProject(state, project) {
-    const savedProject = _.find(state.list, { id: project.id })
+  updateProject(state, data) {
+    const savedProject = _.find(state.list, { id: data.project.id })
 
-    if (!savedProject.published && project.published) {
+    if (!savedProject.published && data.project.published) {
       // Send a push notification
       // when project is published
+      oneSignalHeaders.Authorization = `Basic ${data.env.ONESIGNAL_REST_API}`
+      oneSignalMessage.app_id = data.env.ONESIGNAL_APP_ID
+      oneSignalMessage.template_id = data.env.ONESIGNAL_TEMPLATE_ID
+      oneSignalOptions.headers = oneSignalHeaders
+      oneSignalOptions.data = oneSignalMessage
+
       this.$axios(oneSignalOptions)
     }
 
-    _.merge(savedProject, project)
+    _.merge(savedProject, data.project)
   }
 }
 
@@ -103,7 +92,7 @@ export const actions = {
         return Promise.reject(error)
       })
   },
-  addProject({ commit }, data) {
+  addProject({ commit, rootState }, data) {
     return this.$axios.post(`/api/projects`, data)
       .then((res) => {
         commit('addProject', res.data)
@@ -111,6 +100,12 @@ export const actions = {
         if (res.data.published) {
           // Send a push notification
           // when project is published
+          oneSignalHeaders.Authorization = `Basic ${rootState.env.ONESIGNAL_REST_API}`
+          oneSignalMessage.app_id = rootState.env.ONESIGNAL_APP_ID
+          oneSignalMessage.template_id = rootState.env.ONESIGNAL_TEMPLATE_ID
+          oneSignalOptions.headers = oneSignalHeaders
+          oneSignalOptions.data = oneSignalMessage
+
           this.$axios(oneSignalOptions)
         }
 
@@ -123,7 +118,11 @@ export const actions = {
   updateProject({ commit, rootState }, param) {
     return this.$axios.put(`/api/projects/${param.id}`, param.project)
       .then((res) => {
-        commit('updateProject', res.data[1][0])
+        const data = {
+          project: res.data[1][0],
+          env: rootState.env
+        }
+        commit('updateProject', data)
         if (res.data[1][0].id === rootState.projects.project.id) {
           commit('setProject', res.data[1][0])
         }
