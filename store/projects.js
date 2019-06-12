@@ -1,5 +1,7 @@
 import _ from 'lodash'
 
+console.log(process.env)
+
 const dev = !(process.env.NODE_ENV === 'production')
 let privateConfig
 if (dev) {
