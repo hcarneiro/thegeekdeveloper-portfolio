@@ -118,9 +118,9 @@
         </p>
       </div>
       <div class="cv-button-holder">
-        <div class="primary-button uppercase">
+        <a class="primary-button uppercase" href="./hugo-carneiro-cv.pdf" target="_blank">
           View CV
-        </div>
+        </a>
       </div>
     </div>
   </section>
