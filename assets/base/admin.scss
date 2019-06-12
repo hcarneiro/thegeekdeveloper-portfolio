@@ -142,6 +142,10 @@
       }
     }
 
+    textarea {
+      min-height: 300px;
+    }
+
     .admin-button-holder {
       display: flex;
       flex-flow: row nowrap;

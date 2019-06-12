@@ -33,7 +33,7 @@ router.post('/thumb', (req, res) => {
     bucket.name = isDev && private ? private.S3.BUCKET_NAME : process.env.S3_BUCKET_NAME
 
     const imageTest = new RegExp('image\/.*')
-    const file = req.files.file
+    const file = req.files.file || req.files.image
 
     const params = {
       Key: file.name,
