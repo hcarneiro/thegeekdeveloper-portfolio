@@ -31,6 +31,8 @@ module.exports = {
     failedColor: '#83d6d6'
   },
 
+  env: process.env,
+
   /*
   ** Plugins to load before mounting the App
   */
