@@ -142,8 +142,10 @@
       }
     }
 
-    textarea {
-      min-height: 300px;
+    .form-group {
+      textarea {
+        height: 300px;
+      }
     }
 
     .admin-button-holder {
