@@ -34,7 +34,7 @@
           v-for="(project, index) in projects"
           :key="index"
           tag="div"
-          :to="'/portfolio/' + project.slug"
+          :to="'/work/' + project.slug"
           :class="'mix col-md-6 ' + getCategoryClasses(project.category)"
           :data-slug="project.slug"
         >
