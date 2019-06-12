@@ -44,7 +44,6 @@ module.exports = {
     { src: '~/plugins/nuxt-swiper-plugin.js', ssr: false },
     { src: '~/plugins/vue-dialog.js', ssr: false },
     { src: '~/plugins/vue-lazyload.js', ssr: false },
-    { src: '~/plugins/vue-froala.js', ssr: false },
     { src: '~/plugins/vue-share.js', ssr: false },
     '~/plugins/fontawesome.js',
     '~/plugins/directives.js'
