@@ -1,5 +1,31 @@
 import _ from 'lodash'
 
+const dev = !(process.env.NODE_ENV === 'production')
+let privateConfig
+if (dev) {
+  privateConfig = require('../config/private.json')
+}
+
+const oneSignalHeaders = {
+  'Content-Type': 'application/json; charset=utf-8',
+  'Authorization': `Basic ${dev && privateConfig ? privateConfig.ONESIGNAL_REST_API : process.env.ONESIGNAL_REST_API}`
+}
+
+const oneSignalMessage = {
+  app_id: dev && privateConfig ? privateConfig.ONESIGNAL_APP_ID : process.env.ONESIGNAL_APP_ID,
+  template_id: dev && privateConfig ? privateConfig.ONESIGNAL_TEMPLATE_ID : process.env.ONESIGNAL_TEMPLATE_ID,
+  included_segments: ['All']
+}
+
+const oneSignalOptions = {
+  baseURL: 'https://onesignal.com',
+  port: 443,
+  url: '/api/v1/notifications',
+  method: 'POST',
+  headers: oneSignalHeaders,
+  data: oneSignalMessage
+}
+
 export const state = () => ({
   list: [],
   project: {}
@@ -16,10 +42,15 @@ export const mutations = {
     state.list.push(project)
   },
   updateProject(state, project) {
-    _.chain(state.list)
-      .find({ id: project.id })
-      .merge(project)
-      .value()
+    const savedProject = _.find(state.list, { id: project.id })
+
+    if (!savedProject.published && project.published) {
+      // Send a push notification
+      // when project is published
+      this.$axios(oneSignalOptions)
+    }
+
+    _.merge(savedProject, project)
   }
 }
 
@@ -70,6 +101,13 @@ export const actions = {
     return this.$axios.post(`/api/projects`, data)
       .then((res) => {
         commit('addProject', res.data)
+
+        if (res.data.published) {
+          // Send a push notification
+          // when project is published
+          this.$axios(oneSignalOptions)
+        }
+
         return Promise.resolve(res.data)
       })
       .catch((error) => {

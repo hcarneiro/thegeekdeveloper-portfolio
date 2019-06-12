@@ -28,7 +28,7 @@
             v-for="(project, index) in projects"
             :key="index"
             tag="div"
-            :to="'/portfolio/' + project.slug"
+            :to="'/work/' + project.slug"
             class="swiper-slide"
             :data-slug="project.slug"
           >

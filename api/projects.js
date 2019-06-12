@@ -109,8 +109,9 @@ router.put('/:id', auth, (req, res) => {
       return result.count
     })
     .then((count) => {
+      data.slug = slugify(data.title)
+
       if (count) {
-        data.slug = slugify(data.title)
         data.slug = `${data.slug}-${count}`
       }
 
