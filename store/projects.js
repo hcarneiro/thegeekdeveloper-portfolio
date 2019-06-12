@@ -3,7 +3,11 @@ import _ from 'lodash'
 const dev = !(process.env.NODE_ENV === 'production')
 let privateConfig
 if (dev) {
-  privateConfig = require('../config/private.json')
+  try {
+    privateConfig = require('../config/private.json')
+  } catch (err) {
+    privateConfig = undefined
+  }
 }
 
 const oneSignalHeaders = {
