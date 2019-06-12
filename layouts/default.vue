@@ -57,7 +57,6 @@
 </template>
 
 <script>
-/* global window */
 import $ from 'jquery'
 import Logo from '~/components/Logo.vue'
 import BottomFooter from '~/components/BottomFooter.vue'
