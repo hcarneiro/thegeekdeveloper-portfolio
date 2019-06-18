@@ -37,6 +37,7 @@
           :to="'/work/' + project.slug"
           :class="'mix col-md-6 ' + getCategoryClasses(project.category)"
           :data-slug="project.slug"
+          @click.native="openWork(project)"
         >
           <div v-if="project.thumb" :style="'background-image: url(' + project.thumb + ')'" class="folio-image" />
           <div :class="'folio-info gradient-' + getRandomInt()">
@@ -73,7 +74,10 @@ import { mapState } from 'vuex'
 export default {
   head() {
     return {
-      title: 'Work'
+      title: 'Work',
+      meta: [
+        { hid: 'description', name: 'description', content: 'Some of the things I worked on' }
+      ]
     }
   },
   components: {
@@ -153,6 +157,14 @@ export default {
 
       const containerEl = document.querySelector('.portfolio-container')
       this.mixer = this.mixitup(containerEl)
+    },
+    openWork(project) {
+      this.$ga.event({
+        eventCategory: 'Work',
+        eventAction: 'open',
+        eventLabel: project.title,
+        eventValue: project.id
+      })
     }
   }
 }

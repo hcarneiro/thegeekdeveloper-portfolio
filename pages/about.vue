@@ -118,7 +118,7 @@
         </p>
       </div>
       <div class="cv-button-holder">
-        <a class="primary-button uppercase" href="./hugo-carneiro-cv.pdf" target="_blank">
+        <a class="primary-button uppercase" href="./hugo-carneiro-cv.pdf" target="_blank" @click="openCV">
           View CV
         </a>
       </div>
@@ -130,7 +130,10 @@
 export default {
   head() {
     return {
-      title: 'About'
+      title: 'About',
+      meta: [
+        { hid: 'description', name: 'description', content: 'Who am I?' }
+      ]
     }
   },
   data() {
@@ -141,6 +144,14 @@ export default {
       const start = 2009
       const currentYear = new Date().getFullYear()
       return currentYear - start
+    }
+  },
+  methods: {
+    openCV() {
+      this.$ga.event({
+        eventCategory: 'CV',
+        eventAction: 'open'
+      })
     }
   }
 }

@@ -15,7 +15,7 @@
     </div>
 
     <div class="row">
-      <div v-for="(post, index) in posts" :key="index" class="col-md-4" @click="openMediumPost(post.uniqueSlug)">
+      <div v-for="(post, index) in posts" :key="index" class="col-md-4" @click="openMediumPost(post)">
         <div class="card">
           <div :class="'card-banner gradient-' + getRandomInt()" :style="'background-image: url(https://cdn-images-1.medium.com/max/1200/' + post.virtuals.previewImage.imageId + ')'" />
           <div>
@@ -46,7 +46,10 @@ import { mapState } from 'vuex'
 export default {
   head() {
     return {
-      title: 'Blog'
+      title: 'Blog',
+      meta: [
+        { hid: 'description', name: 'description', content: 'Some stuff I wrote' }
+      ]
     }
   },
   components: {
@@ -94,8 +97,15 @@ export default {
 
       return string.substring(0, 80).trim() + '...'
     },
-    openMediumPost(slug) {
-      window.open(`https://medium.com/@hugodesigns/${slug}`, '_blank')
+    openMediumPost(post) {
+      this.$ga.event({
+        eventCategory: 'Blog',
+        eventAction: 'open',
+        eventLabel: post.title,
+        eventValue: post.uniqueSlug
+      })
+
+      window.open(`https://medium.com/@hugodesigns/${post.uniqueSlug}`, '_blank')
     },
     getRandomInt() {
       return Math.floor(Math.random() * Math.floor(6)) + 1
