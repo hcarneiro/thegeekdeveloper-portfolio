@@ -94,7 +94,7 @@
         <div v-for="(project, index) in projects" :key="index" class="col-md-4">
           <div class="card">
             <div class="project-image-holder">
-              <img v-if="project.thumb" v-lazy="project.thumb" class="project-image">
+              <img v-if="project.thumb" :src="project.thumb" class="project-image" :alt="project.title">
             </div>
             <div class="project-status">
               <span v-if="project.published" class="success-text">Published</span>

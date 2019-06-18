@@ -2,7 +2,11 @@ const pkg = require('./package')
 const dev = !(process.env.NODE_ENV === 'production')
 let private
 if (dev) {
-  private = require('./config/private.json')
+  try {
+    private = require('./config/private.json')
+  } catch (err) {
+    private = undefined
+  }
 }
 
 module.exports = {
@@ -43,7 +47,6 @@ module.exports = {
     { src: '~/plugins/modernizr-custom.js', ssr: false },
     { src: '~/plugins/nuxt-swiper-plugin.js', ssr: false },
     { src: '~/plugins/vue-dialog.js', ssr: false },
-    { src: '~/plugins/vue-lazyload.js', ssr: false },
     { src: '~/plugins/vue-share.js', ssr: false },
     '~/plugins/fontawesome.js',
     '~/plugins/directives.js'
