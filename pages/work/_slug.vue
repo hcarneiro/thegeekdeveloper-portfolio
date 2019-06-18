@@ -34,19 +34,16 @@
               <vue-goodshare-linked-in
                 :page_url="'https://www.thegeekdeveloper.com' + fullPath"
                 title_social="LinkedIn"
-                has_counter
                 has_icon
               />
               <vue-goodshare-facebook
                 :page_url="'https://www.thegeekdeveloper.com' + fullPath"
                 title_social="Facebook"
-                has_counter
                 has_icon
               />
               <vue-goodshare-twitter
                 :page_url="'https://www.thegeekdeveloper.com' + fullPath"
                 title_social="Twitter"
-                has_counter
                 has_icon
               />
             </no-ssr>
@@ -69,7 +66,11 @@ import { mapState } from 'vuex'
 export default {
   head() {
     return {
-      title: this.project.title
+      title: this.project.title,
+      meta: [
+        { hid: 'description', name: 'description', content: this.project.tags },
+        { property: 'og:image', content: this.project.thumb }
+      ]
     }
   },
   data() {
