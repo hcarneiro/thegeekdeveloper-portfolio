@@ -69,7 +69,7 @@ export default {
       title: this.project.title,
       meta: [
         { hid: 'description', name: 'description', content: this.project.tags },
-        { property: 'og:image', content: this.project.thumb }
+        { hid: 'og:image', property: 'og:image', content: this.project.thumb }
       ]
     }
   },

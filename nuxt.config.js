@@ -20,7 +20,8 @@ module.exports = {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: pkg.description }
+      { hid: 'description', name: 'description', content: pkg.description },
+      { hid: 'og:image', property: 'og:image', content: '/portfolio-preview.jpg' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
@@ -81,13 +82,7 @@ module.exports = {
   googleAnalytics: {
     id: dev && private ? private.GOOGLE_ANALYTICS : process.env.GOOGLE_ANALYTICS,
     autoTracking: {
-      pageviewTemplate (route) {
-        return {
-          page: route.path,
-          title: document.title,
-          location: window.location.href
-        }
-      }
+      screenview: true
     }
   },
 
@@ -96,10 +91,7 @@ module.exports = {
   */
   meta: {
     name: 'The Geek Developer',
-    ogHost: dev ? 'http://localhost:3333' : 'https://www.thegeekdeveloper.com',
-    ogImage: {
-      path: '/portfolio-preview.jpg'
-    },
+    ogHost: dev ? 'http://localhost:3333' : 'https://www.thegeekdeveloper.com', 
     twitterCard: 'summary',
     twitterSite: '@thehugodesigns',
     twitterCreator: '@thehugodesigns'
