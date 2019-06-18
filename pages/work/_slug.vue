@@ -68,8 +68,9 @@ export default {
     return {
       title: this.project.title,
       meta: [
-        { hid: 'description', name: 'description', content: this.project.tags },
-        { hid: 'og:image', property: 'og:image', content: this.project.thumb }
+        { hid: 'description', name: 'description', content: this.project.title },
+        { hid: 'og-image', property: 'og:image', content: this.project.thumb },
+        { hid: 'keywords', name: 'keywords', keywords: this.project.tags }
       ]
     }
   },

@@ -1,5 +1,6 @@
 const pkg = require('./package')
 const dev = !(process.env.NODE_ENV === 'production')
+const baseURL = dev ? 'http://localhost:3333' : process.env.API_URL
 let private
 if (dev) {
   try {
@@ -18,10 +19,9 @@ module.exports = {
   head: {
     titleTemplate: '%s - The Geek Developer',
     meta: [
-      { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: pkg.description },
-      { hid: 'og:image', property: 'og:image', content: '/portfolio-preview.jpg' }
+      { hid: 'keywords', name: 'keywords', keywords: 'Portfolio, Personal Website, Web Developer, Designer, Developer, Geek, Gamer' },
+      { hid: 'og-image', property: 'og:image', content: baseURL + '/portfolio-preview.jpg' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
@@ -91,6 +91,7 @@ module.exports = {
   */
   meta: {
     name: 'The Geek Developer',
+    description: false,
     ogHost: dev ? 'http://localhost:3333' : 'https://www.thegeekdeveloper.com', 
     twitterCard: 'summary',
     twitterSite: '@thehugodesigns',
