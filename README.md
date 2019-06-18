@@ -1,4 +1,5 @@
 # The Geek Developer Portfolio
+![The Geek Developer Portfolio](http://cdn.thegeekdeveloper.com/portfolio-preview.jpg)
 
 ## Build Setup
 
