@@ -78,7 +78,10 @@
 export default {
   head() {
     return {
-      title: 'Contact'
+      title: 'Contact',
+      meta: [
+        { hid: 'description', name: 'description', content: 'Get in touch' }
+      ]
     }
   },
   data() {

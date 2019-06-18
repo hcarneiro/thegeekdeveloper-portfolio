@@ -31,9 +31,10 @@
             :to="'/work/' + project.slug"
             class="swiper-slide"
             :data-slug="project.slug"
+            @click.native="openWork(project)"
           >
             <div class="slide-wrapper">
-              <img v-if="project.thumb" :src="project.thumb" :alt="'project-' + index" class="folio-image">
+              <img v-if="project.thumb" :src="project.thumb" :alt="project.title" class="folio-image">
               <div :class="'folio-info gradient-' + (index + 1)">
                 <div class="folio-title">
                   {{ project.title }}
@@ -130,6 +131,14 @@ export default {
   methods: {
     getProjects() {
       return this.$store.dispatch('projects/getProjects')
+    },
+    openWork(project) {
+      this.$ga.event({
+        eventCategory: 'Work',
+        eventAction: 'open',
+        eventLabel: project.title,
+        eventValue: project.id
+      })
     }
   }
 }

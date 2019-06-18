@@ -2,7 +2,11 @@ const pkg = require('./package')
 const dev = !(process.env.NODE_ENV === 'production')
 let private
 if (dev) {
-  private = require('./config/private.json')
+  try {
+    private = require('./config/private.json')
+  } catch (err) {
+    private = undefined
+  }
 }
 
 module.exports = {
@@ -43,7 +47,6 @@ module.exports = {
     { src: '~/plugins/modernizr-custom.js', ssr: false },
     { src: '~/plugins/nuxt-swiper-plugin.js', ssr: false },
     { src: '~/plugins/vue-dialog.js', ssr: false },
-    { src: '~/plugins/vue-lazyload.js', ssr: false },
     { src: '~/plugins/vue-share.js', ssr: false },
     '~/plugins/fontawesome.js',
     '~/plugins/directives.js'
@@ -67,9 +70,40 @@ module.exports = {
     '@nuxtjs/axios',
     // Doc: https://bootstrap-vue.js.org/docs/
     'bootstrap-vue/nuxt',
+    '@nuxtjs/google-analytics',
     '@nuxtjs/onesignal',
     '@nuxtjs/pwa'
   ],
+
+  /*
+  ** Google Analytics configuration
+  */
+  googleAnalytics: {
+    id: dev && private ? private.GOOGLE_ANALYTICS : process.env.GOOGLE_ANALYTICS,
+    autoTracking: {
+      pageviewTemplate (route) {
+        return {
+          page: route.path,
+          title: document.title,
+          location: window.location.href
+        }
+      }
+    }
+  },
+
+  /*
+  ** Meta configuration
+  */
+  meta: {
+    name: 'The Geek Developer',
+    ogHost: dev ? 'http://localhost:3333' : 'https://www.thegeekdeveloper.com',
+    ogImage: {
+      path: '/portfolio-preview.jpg'
+    },
+    twitterCard: 'summary',
+    twitterSite: '@thehugodesigns',
+    twitterCreator: '@thehugodesigns'
+  },
 
   /*
   ** OneSignal module configuration
