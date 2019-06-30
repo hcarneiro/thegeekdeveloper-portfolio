@@ -1,7 +1,7 @@
 const path = require('path')
 const Sequelize = require('sequelize')
 const env = (process.env.NODE_ENV).toLowerCase()
-const config = require(path.resolve( __dirname, './local-config.json'))
+const config = require(path.resolve(__dirname, './local-config.json'))
 const redis = require('redis')
 const bluebird = require('bluebird')
 const dev = !(env === 'production')
@@ -15,15 +15,15 @@ const MAX_LOCK_TIME = 120
 
 const database = {}
 
-database.redis = redis.createClient(!dev ? process.env['REDIS_URL'] : config.redis)
+database.redis = redis.createClient(!dev ? process.env.REDIS_URL : config.redis)
 
 const operationsColors = {
   INSERT: 32, // green
   UPDATE: 33, // yellow
-  DELETE: 31  // red
+  DELETE: 31 // red
 }
 
-const dbLogging = !!config.query_logging ? function (query) {
+const dbLogging = config.query_logging ? function (query) {
   let color = 2 // dim
 
   Object.keys(operationsColors).some(function (op) {
@@ -40,7 +40,7 @@ database.db = new Sequelize(DATABASE_URL, {
   logging: dbLogging,
   dialect: 'postgres',
   dialectOptions: {
-    ssl: !dev ? true : false
+    ssl: !dev
   },
   pool: {
     max: 25,
