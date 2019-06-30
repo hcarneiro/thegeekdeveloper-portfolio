@@ -73,8 +73,33 @@ module.exports = {
     // Doc: https://bootstrap-vue.js.org/docs/
     'bootstrap-vue/nuxt',
     '@nuxtjs/google-analytics',
-    '@nuxtjs/pwa'
+    '@nuxtjs/pwa',
+    '@nuxtjs/sitemap'
   ],
+
+  /*
+  ** Sitemap configuration
+  */
+  sitemap: {
+    gzip: true,
+    exclude: [
+      '/auth',
+      '/api/**',
+      '/logout'
+    ],
+    defaults: {
+      changefreq: 'monthly',
+      priority: 0.7,
+      lastmod: new Date(),
+      lastmodrealtime: true
+    },
+    routes: [
+      '/work/fliplet-studio-v2',
+      '/work/nuxtjs-with-basic-authentication',
+      '/work/sortable-dom-tree',
+      '/work/the-geek-developer-portfolio'
+    ]
+  },
 
   /*
   ** Google Analytics configuration

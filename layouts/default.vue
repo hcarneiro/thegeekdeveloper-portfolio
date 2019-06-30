@@ -58,11 +58,11 @@
 
 <script>
 import $ from 'jquery'
+import { mapState } from 'vuex'
 import Logo from '~/components/Logo.vue'
 import BottomFooter from '~/components/BottomFooter.vue'
 import AdminArea from '~/components/AdminArea.vue'
 import AdminOverlay from '~/components/AdminOverlay.vue'
-import { mapState } from 'vuex'
 
 export default {
   components: {
