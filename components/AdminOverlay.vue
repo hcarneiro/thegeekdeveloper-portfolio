@@ -141,9 +141,9 @@
 
 <script>
 /* global textboxio */
-import Loading from '~/components/Loading'
 import { find } from 'lodash'
 import { mapState } from 'vuex'
+import Loading from '~/components/Loading'
 
 export default {
   components: {

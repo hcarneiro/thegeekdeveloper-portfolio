@@ -67,9 +67,9 @@
 </template>
 
 <script>
-import LoadingCard from '~/components/LoadingCard'
 import _ from 'lodash'
 import { mapState } from 'vuex'
+import LoadingCard from '~/components/LoadingCard'
 
 export default {
   head() {

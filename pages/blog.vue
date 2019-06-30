@@ -40,8 +40,8 @@
 </template>
 
 <script>
-import LoadingCard from '~/components/LoadingCard'
 import { mapState } from 'vuex'
+import LoadingCard from '~/components/LoadingCard'
 
 export default {
   head() {
