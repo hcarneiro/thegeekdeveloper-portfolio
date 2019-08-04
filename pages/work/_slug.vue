@@ -53,7 +53,7 @@
     </template>
     <template v-else>
       <div class="text-center">
-        <nuxt-link class="primary-button uppercase inline" tag="div" :to="'/work'">
+        <nuxt-link class="primary-button uppercase inline" tag="a" :to="'/work'">
           Go back
         </nuxt-link>
       </div>

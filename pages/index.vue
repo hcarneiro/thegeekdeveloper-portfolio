@@ -27,7 +27,7 @@
           <nuxt-link
             v-for="(project, index) in projects"
             :key="index"
-            tag="div"
+            tag="a"
             :to="'/work/' + project.slug"
             class="swiper-slide"
             :data-slug="project.slug"

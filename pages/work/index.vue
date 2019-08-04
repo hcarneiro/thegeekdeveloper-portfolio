@@ -33,7 +33,7 @@
         <nuxt-link
           v-for="(project, index) in projects"
           :key="index"
-          tag="div"
+          tag="a"
           :to="'/work/' + project.slug"
           :class="'mix col-md-6 ' + getCategoryClasses(project.category)"
           :data-slug="project.slug"
