@@ -243,30 +243,36 @@ a {
     }
   }
 
-  .logo {
-    width: $logoSize;
-    min-width: $logoSize;
-    height: $logoSize;
-    border-radius: $logoSize;
-    margin-right: 15px;
-    background-image: url('/icon-transparent.png');
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-    cursor: pointer;
-    @include transition(all 0.3s cubic-bezier(0.25, 0.8, 0.5, 1));
-  }
+  .logo-holder {
+    display: flex;
+    align-items: center;
 
-  .logo-text {
-    font-size: 1em;
-    font-weight: 700;
-    line-height: 1.2;
-
-    @include above($mobileSize) {
-      font-size: 1.2em;
+    .logo {
+      width: $logoSize;
+      min-width: $logoSize;
+      height: $logoSize;
+      border-radius: $logoSize;
+      margin-right: 15px;
+      background-image: url('/icon-transparent.png');
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      cursor: pointer;
+      @include transition(all 0.3s cubic-bezier(0.25, 0.8, 0.5, 1));
     }
-    @include above($tabletSize) {
-      font-size: 1.5em;
+
+    .logo-text {
+      font-size: 1em;
+      font-weight: 700;
+      line-height: 1.2;
+      color: $textColorDark;
+
+      @include above($mobileSize) {
+        font-size: 1.2em;
+      }
+      @include above($tabletSize) {
+        font-size: 1.5em;
+      }
     }
   }
 }
