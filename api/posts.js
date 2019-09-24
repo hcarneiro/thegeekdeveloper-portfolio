@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const mediumJSONFeed = require('medium-json-feed')
 
-router.get('/', async (req, res) => {
+router.get('/', (req, res) => {
   mediumJSONFeed('@hugodesigns/latest')
     .then((data) => {
       res.send(data)

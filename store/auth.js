@@ -27,7 +27,7 @@ export const actions = {
     commit('setAuthenticated', value)
   },
   logout({ commit }) {
-    this.$axios.get(`/logout`)
+    this.$axios.get('/logout')
       .then(() => {
         // Nothing to do here
         // It should fail
