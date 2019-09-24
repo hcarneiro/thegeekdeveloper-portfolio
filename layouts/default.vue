@@ -19,9 +19,9 @@
           </nuxt-link>
         </li>
         <li>
-          <nuxt-link class="menu-item" :to="'/blog'">
+          <a class="menu-item" href="https://medium.com/@hugodesigns/latest" target="_blank">
             Blog
-          </nuxt-link>
+          </a>
         </li>
         <li>
           <nuxt-link class="menu-item" :to="'/contact'">
