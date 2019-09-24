@@ -8,7 +8,7 @@ export const actions = {
       thumb: ''
     }
 
-    return this.$axios.post(`/api/upload/thumb`, file)
+    return this.$axios.post('/api/upload/thumb', file)
       .then((res) => {
         if (res.status === 200) {
           projectData.thumb = res.data.url

@@ -10,7 +10,7 @@ export const mutations = {
 
 export const actions = {
   getPosts({ commit }) {
-    return this.$axios.get(`/api/posts`)
+    return this.$axios.get('/api/posts')
       .then((res) => {
         if (res.data.status === 200) {
           commit('setPosts', res.data.response)

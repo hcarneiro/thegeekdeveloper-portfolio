@@ -46,7 +46,7 @@ export default {
       return (this.error && this.error.statusCode) || 500
     },
     message() {
-      return this.error.message || `Error`
+      return this.error.message || 'Error'
     }
   }
 }

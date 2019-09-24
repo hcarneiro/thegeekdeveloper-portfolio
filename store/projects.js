@@ -51,7 +51,7 @@ export const mutations = {
 
 export const actions = {
   getProjects({ commit }) {
-    return this.$axios.get(`/api/projects`)
+    return this.$axios.get('/api/projects')
       .then((res) => {
         if (res.status === 200) {
           commit('setProjects', res.data)
@@ -93,7 +93,7 @@ export const actions = {
       })
   },
   addProject({ commit, rootState }, data) {
-    return this.$axios.post(`/api/projects`, data)
+    return this.$axios.post('/api/projects', data)
       .then((res) => {
         commit('addProject', res.data)
 
