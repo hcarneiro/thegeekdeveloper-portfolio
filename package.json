@@ -27,7 +27,7 @@
     "@nuxtjs/axios": "^5.5.4",
     "@nuxtjs/google-analytics": "^2.2.0",
     "@nuxtjs/onesignal": "^3.0.0-beta.14",
-    "@nuxtjs/pwa": "^2.6.0",
+    "@nuxtjs/pwa": "^3.3.5",
     "@nuxtjs/sitemap": "^1.2.0",
     "async": "^3.1.0",
     "aws-sdk": "^2.485.0",
