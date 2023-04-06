@@ -47,7 +47,7 @@
     "gm": "^1.23.1",
     "helmet": "^3.18.0",
     "image-size": "^0.7.4",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "lodash": "^4.17.15",
     "medium-json-feed": "0.0.3",
     "mixitup": "^3.3.1",
