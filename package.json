@@ -51,7 +51,7 @@
     "lodash": "^4.17.15",
     "medium-json-feed": "0.0.3",
     "mixitup": "^3.3.1",
-    "nuxt": "^2.8.1",
+    "nuxt": "^3.4.3",
     "nuxt-webfontloader": "^1.1.0",
     "path": "^0.12.7",
     "pg": "^7.11.0",
